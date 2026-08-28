@@ -1,0 +1,9 @@
+# Không commit key/secrets
+.streamlit/secrets.toml
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
