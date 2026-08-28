@@ -12,7 +12,7 @@
 
 ---
 
-## 🇻🇳 Giới thiệu
+## Giới thiệu
 
 **ScamShield VN** là một ứng dụng AI hỗ trợ người dùng Việt Nam **phân tích, giải thích và xử lý các nội dung có dấu hiệu lừa đảo trực tuyến**.
 
@@ -62,3 +62,131 @@ ScamShield VN hướng tới quy trình:
               ▼
         🛡️ ACT
      Hành động an toàn
+```
+# 🧠 Explainable AI
+
+Một trong những nguyên tắc thiết kế quan trọng nhất của ScamShield:
+
+> ### AI không chỉ đưa ra kết luận — AI phải chỉ ra bằng chứng.
+
+Ví dụ:
+
+```text
+🚨 RỦI RO: 87/100
+
+WHY?
+
+🔴 Yêu cầu OTP
+   +30
+
+   "Vui lòng cung cấp mã OTP..."
+
+   → OTP có thể được sử dụng để xác thực
+     giao dịch hoặc đăng nhập trái phép.
+
+🔴 Mạo danh ngân hàng
+   +20
+
+   "Ngân hàng ABC thông báo..."
+
+   → Nội dung tự nhận là đại diện
+     cho một tổ chức tài chính.
+
+🟠 Liên kết đáng ngờ
+   +15
+
+🟠 Tạo cảm giác khẩn cấp
+   +10
+```
+
+Mỗi điểm rủi ro cần có **evidence tương ứng**.
+
+---
+
+# 🔐 An toàn & Privacy
+
+ScamShield được thiết kế theo nguyên tắc hạn chế việc yêu cầu thông tin nhạy cảm.
+
+### Không yêu cầu người dùng cung cấp:
+
+- ❌ Mật khẩu ngân hàng.
+- ❌ Mã PIN.
+- ❌ Mã OTP thật.
+- ❌ Thông tin đăng nhập tài khoản.
+
+Nếu nội dung người dùng cung cấp có chứa thông tin nhạy cảm, người dùng nên chủ động che/mask thông tin trước khi upload khi có thể.
+---
+
+# 🎯 Design Philosophy
+
+ScamShield VN được xây dựng dựa trên 4 nguyên tắc:
+
+### 01 — Evidence First
+
+> **Không có bằng chứng → Không cộng điểm.**
+
+### 02 — Explainability
+
+> **Người dùng phải hiểu tại sao AI đưa ra cảnh báo.**
+
+### 03 — Actionability
+
+> **Cảnh báo phải đi kèm hành động cụ thể.**
+
+### 04 — Human Verification
+
+> **AI hỗ trợ quyết định; người dùng vẫn là người đưa ra quyết định cuối cùng.**
+
+---
+
+# 🏗️ Kiến trúc hệ thống
+
+```mermaid
+flowchart TD
+
+    A[👤 User] --> B[🖥️ Streamlit Web App]
+
+    B --> C{Input Type}
+
+    C -->|Text| D[📝 Text Input]
+    C -->|Screenshot| E[🖼️ Image Upload]
+
+    D --> F[🧠 Google Gemini]
+    E --> F
+
+    F --> G[🔍 Evidence Extraction]
+    G --> H[🧬 Risk Score Matrix]
+    H --> I[🧠 Psychological Tactics]
+    I --> J[📊 Structured JSON Output]
+
+    J --> K[🛡️ Risk Dashboard]
+
+    J --> L[🏢 organization_to_verify]
+    L --> M[🌐 Google Maps Verification]
+
+    J --> N[📧 One-click Report]
+
+    B --> O[👨‍💻 Developer Mode]
+
+    P[🐳 Docker] --> Q[☁️ Google Cloud Run]
+    Q --> B
+```
+
+---
+
+# 🧰 Tech Stack
+
+| Thành phần | Công nghệ | Vai trò |
+|---|---|---|
+| Frontend | **Streamlit** | Web Application & UI |
+| AI Engine | **Google Gemini** | Phân tích Text + Vision |
+| AI Output | **Structured JSON / Output Contract** | Chuẩn hóa kết quả AI |
+| Risk Engine | **Risk Score Matrix** | Định lượng mức độ rủi ro |
+| Vision | **Gemini Multimodal** | Phân tích screenshot |
+| Verification | **Google Maps** | Tra cứu và đối chiếu tổ chức |
+| Report | **mailto:** | Tạo báo cáo cảnh báo |
+| Container | **Docker** | Đóng gói ứng dụng |
+| Deployment | **Google Cloud Run** | Triển khai ứng dụng |
+
+---
+
